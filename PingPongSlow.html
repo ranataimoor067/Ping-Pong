@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="google" content="notranslate">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="PingPongstyle.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<title>Ping Pong</title>
+	</head>
+	<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="headline">Ping Pong</h1>
+			</div>
+			<div class="col-sm-12">
+				<div class="options">
+					<label for="inputList">Level:</label>
+					<select name="inputList" onchange="location = this.value;">
+						<option value="PingPongSlow.html">Slow</option>
+						<option value="index.html">Normal</option>
+						<option value="PingPongFast.html">Fast</option>
+					</select>
+					<button onClick="window.location.reload()">Replay</button>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<p class="info">Use arrow keys to play.</p>
+			</div>
+		</div>
+			<canvas id="canvas"></canvas>
+		
+		<!-- #onScreenControllers buttons for mobile screens -->
+		<div id="onScreenControllers">
+			<button id="upButton" onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">&#129065;</button>
+			<button id="downButton" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">&#129067;</button>
+		</div>
+	</div>
+		<script type="text/javascript" src="PingPongSlowScript.js"></script>
+	</body>
+</html>

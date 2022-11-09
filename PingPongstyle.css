@@ -1,0 +1,115 @@
+* {
+	box-sizing: border-box;
+}
+	
+body {
+	background-image: url("Tennis.jpg");
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+	text-align: center;
+}
+	  	  
+h1 {
+	font-size: 3rem;
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #fff;
+}
+	  
+.options {
+	margin-bottom: 1rem;
+}
+	  
+label {
+	font-size: 1rem;
+	font-family: Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+}
+	  
+select {
+	border-radius: 0.2rem;
+	color: #616361;
+	font-size: 1rem;
+	font-family: Verdana, Helvetica, sans-serif;
+}
+	  
+button {
+	padding: 0.1rem;
+	border-radius: 0.4rem;
+	background-color: #303730;
+	color: #e9e8e8;
+	font-size: 1rem;
+	font-family: Verdana, Helvetica, sans-serif;
+}
+
+.info {
+	font-size: 1rem;
+	font-family: Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #fff;
+}
+	  
+canvas {
+	border: 0.5rem solid #fff;
+	cursor: none;
+	width: 100%;
+}
+
+
+/* Buttons hide #onScreenControllers on desktop */
+#onScreenControllers {
+	display: none;
+}
+
+/* MOBILE */
+@media only screen and (max-width: 1200px) {
+#onScreenControllers {
+	width: 100%;
+    display: table;
+    align-items: center;
+}
+
+canvas {
+	z-index: 0;
+}
+
+#onScreenControllers button {
+    background-color: transparent;
+	color: #fff;
+    height: 15vw;
+    width: 15vw;
+    font-size: 7.5vw;
+    border: 1vw solid #00fea5;
+	border-radius: 5rem;
+}
+
+#upButton {
+	float: left;
+	position: fixed;
+	top: 80%;
+	left: 2%;
+	z-index: 1;
+}
+
+#downButton {
+	float: right;
+	position: fixed;
+	top: 80%;
+	right: 2%;
+	z-index: 1;
+}
+
+#onScreenControllers button:focus {
+	outline: none;
+}
+
+#onScreenControllers button:active {
+	background-color: #00fea5;
+}
+
+.info {
+	display: none;
+}
+}
