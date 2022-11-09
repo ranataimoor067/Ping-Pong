@@ -1,6 +1,6 @@
-// einen Verweis auf unsere "canvas" mit Hilfe ihrer ID erfassen
+// capture a reference to our "canvas" using its ID
 const canvas = document.getElementById("canvas");
-/* einen "context" erhalten. Ohne "context" können wir nicht auf canvas zeichnen */
+// get a "context". Without "context" we cannot draw on canvas 
 const ctx = canvas.getContext("2d");
 
 canvas.width = 625;
@@ -13,7 +13,7 @@ const winSound = new Audio("WinPingPong.mp3");
 const loseSound = new Audio("LosePingPong.mp3");
 const wallHitSound = new Audio("WallPingPong.mp3");
 
-/* zusätzliche Variablen */
+// additional variables 
 const netWidth = 4;
 const netHeight = canvas.height;
 
@@ -24,7 +24,7 @@ let upArrowPressed = false;
 let downArrowPressed = false;
 
 
-/* objekte */
+// objects 
 const net = {
 	x: canvas.width / 2 - netWidth / 2,
 	y: 0,
@@ -63,19 +63,19 @@ const ball = {
 	color: "#f6ee0e"
 };
 
-/* die Deklaration der Objekte endet */
+// the declaration of the objects ends
 
-/* Zeichenfunktionen */
-// Funktion zum Zeichnen des Netzes(net)
+// Drawing functions
+// function to draw the mesh
 function drawNet() {
-	// die Farbe von net einstellen
+	//  set the color of mesh
 	ctx.fillStyle = net.color;
 
 	// syntax --> fillRect(x, y, width, height)
 	ctx.fillRect(net.x, net.y, net.width, net.height);
 }
 
-// Funktion zum Zeichnen von Punkten
+// Function for drawing points
 function drawScore(x, y, score) {
 	ctx.fillStyle = "#fff";
 	ctx.font = "60px Verdana sans-serif";
@@ -84,13 +84,13 @@ function drawScore(x, y, score) {
 	ctx.fillText(score, x, y);
 }
 
-// Funktion zum Zeichnen des Paddels
+// Function to draw the paddle
 function drawPaddle(x, y, width, height, color) {
 	ctx.fillStyle = color;
 	ctx.fillRect(x, y, width, height);
 }
 
-// Funktion zum Zeichnen des balls
+// Function to draw the balls
 function drawBall(x, y, radius, color) {
 	ctx.fillStyle = color;
 	ctx.beginPath();
@@ -100,16 +100,16 @@ function drawBall(x, y, radius, color) {
 	ctx.fill();
 }
 
-/* Zeichenfunktionen Ende */
+// Drawing functions end
 
-/* Paddles bewegen */
-// Hinzufügen eines EventListeners zum Browserfenster
+// Move paddles
+// Adding an EventListener to the browser
 window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
 
-// wird aktiviert, wenn wir eine Taste drücken
+// is activated when we press a key
 function keyDownHandler(event) {
-	// den keyCode erhalten
+	// get the keyCode
 	switch (event.keyCode) {
 		// "up arrow" key
 		case 38:
@@ -123,7 +123,7 @@ function keyDownHandler(event) {
 	}
 }
 
-// wird aktiviert, wenn wir die Taste loslassen
+// is activated when we release the key
 function keyUpHandler(event) {
 	switch (event.keyCode) {
 		// "up arraow" key
@@ -137,21 +137,21 @@ function keyUpHandler(event) {
 	}
 }
 
-/* bewegliche Paddles Abschnitt Ende */
+// moving paddles section end
 
-// den Ball zurücksetzen
+// reset the ball
 function reset() {
-	// den Wert des Balls auf ältere Werte zurücksetzen
+	// reset the value of the ball to older values
 	ball.x = canvas.width / 2;
 	ball.y = canvas.height / 2;
 	ball.speed = 9;
 
-	// ändert die Richtung des Balls
+	// changes the direction of the ball
 	ball.velocityX = -ball.velocityX;
 	ball.velocityY = -ball.velocityY;
 }
 
-// Kollisionserkennungsfunktion - collision Detect function
+// collision Detect function
 function collisionDetect(player, ball) {
 	// returns true or false
 	player.top = player.y;
@@ -167,98 +167,98 @@ function collisionDetect(player, ball) {
 	return ball.left < player.right && ball.top < player.bottom && ball.right > player.left && ball.bottom > player.top;
 }
 
-// Aktualisierungsfunktion, um die Position der Dinge zu aktualisieren
+// Update function to update the position
 function update() {
-	// das Paddel bewegen
+	// move the paddle
 	if (upArrowPressed && user.y > 0) {
 		user.y -= 8;
 	} else if (downArrowPressed && (user.y < canvas.height - user.height)) {
 		user.y += 8;
 	}
 
-	// Prüfen, ob der Ball die obere oder untere Wand trifft
+	// Check if the ball hits the upper or lower wall
 	if (ball.y + ball.radius >= canvas.height || ball.y - ball.radius <= 0) {
 		// play wallHitSound
 		wallHitSound.play();
 		ball.velocityY = -ball.velocityY;
 	}
 
-	// wenn der Ball die rechte Wand trifft
+	// when the ball hits the right wall
 	if (ball.x + ball.radius >= canvas.width) {
 		// play winSound
 		winSound.play();
-		// dann erhält der user 1 Punkt
+		// then the user gets 1 point
 		user.score += 1;
 		reset();
 	}
 
-	// wenn der Ball die linke Wand trifft
+	// when the ball hits the left wall
 	if (ball.x - ball.radius <= 0) {
 		// play loseSound
 		loseSound.play();
-		// dann hat KI 1 Punkt erzielt
+		// then computer has scored 1 point
 		com.score += 1;
 		reset();
 	}
 
-	// den Ball bewegen
+	// move ball
 	ball.x += ball.velocityX;
 	ball.y += ball.velocityY;
 
-	// KI-Paddel-Bewegung
+	// computer paddle move
 	com.y += ((ball.y - (com.y + com.height / 2))) * 0.2;
 
-	// Kollisionserkennung bei Paddeln
+	// Paddle collision detection
 	let player = (ball.x < canvas.width / 2) ? user : com;
 
 	if (collisionDetect(player, ball)) {
 		// play hitSound
 		hitSound.play();
-		// Standardwinkel ist 0deg im Radius
+		// Default angle is 0 deg in radius
 		let angle = 0;
 
-    // wenn der Ball das obere Ende des Paddels trifft
+    // when the ball hits the top of the paddle
     if (ball.y < (player.y + player.height / 2)) {
-		// dann -1 * Math.PI / 4 = -45deg
+		// then -1 * Math.PI / 4 = -45deg
 		angle = -1 * Math.PI / 4;
 	} else if (ball.y > (player.y + player.height / 2)) {
-		// wenn es den Boden des Paddels trifft
-		// dann wird der Winkel Math.PI / 4 = 45deg
+		// when it hits the bottom of the paddle
+		// then the angle Math.PI / 4 = 45deg
 		angle = Math.PI / 4;
     }
 
-	/* die Geschwindigkeit des Balls zu ändern, je nachdem, mit welchem Paddel der Ball getroffen wurde */
+	// change the speed of the ball depending on which paddle hit the ball
 	ball.velocityX = (player === user ? 1 : -1) * ball.speed * Math.cos(angle);
 	ball.velocityY = ball.speed * Math.sin(angle);
 
-	// Ballgeschwindigkeit erhöhen
+	// Increase ball speed
 	ball.speed += 0.2;
 	}
 }
 
-// Die Render-Funktion zeichnet alles auf canvas
+// The render function draws everything on canvas
 function render() {
-	// einen Stil festlegen
-	ctx.fillStyle = "#2aac2a"; /* alles, was darunter liegt, erhält die Farbe Schwarz (#000). */
-	// zeichnet das Brettes
+	// set a style
+	ctx.fillStyle = "#2aac2a"; // everything below it gets the color black (#000)
+	// draws the board
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-	// Netz ziehen
+	// Pull mesh
 	drawNet();
-	// user-score ermitteln
+	// determine user-score
 	drawScore(canvas.width / 4, canvas.height / 6, user.score);
-	// KI score ermitteln
+	// determine computer score
 	drawScore(3 * canvas.width / 4, canvas.height / 6, com.score);
-	// user-paddel zeichnen
+	// draw user paddle
 	drawPaddle(user.x, user.y, user.width, user.height, user.color);
-	// KI-paddle zeichnen
+	// computer paddle drawing
 	drawPaddle(com.x, com.y, com.width, com.height, com.color);
-	// ball zeichnen
+	// draw ball
 	drawBall(ball.x, ball.y, ball.radius, ball.color);
 }
 
 
-// buttons für Touchscreen
+// touchscreen
 function moveup() {
 	upArrowPressed = 1;
 }
@@ -275,11 +275,11 @@ function clearmove() {
 
 // gameLoop
 function gameLoop() {
-	// update()-Funktion hier
+	// update()-function here
 	update();
-	// render()-Funktion hier
+	// render()-function here
 	render();
 }
 
-// ruft die Funktion gameLoop() 60 mal pro Sekunde auf
+// calls the gameLoop() function 60 times per second
 setInterval(gameLoop, 1000 / 60);
