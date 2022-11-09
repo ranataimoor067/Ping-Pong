@@ -13,7 +13,7 @@ const winSound = new Audio("WinPingPong.mp3");
 const loseSound = new Audio("LosePingPong.mp3");
 const wallHitSound = new Audio("WallPingPong.mp3");
 
-// additional variables 
+// net
 const netWidth = 4;
 const netHeight = canvas.height;
 
@@ -65,17 +65,17 @@ const ball = {
 
 // the declaration of the objects ends
 
-// Drawing functions
-// function to draw the mesh
+// drawing functions
+// function to draw the net
 function drawNet() {
-	//  set the color of mesh
+	//  set the color of net
 	ctx.fillStyle = net.color;
 
 	// syntax --> fillRect(x, y, width, height)
 	ctx.fillRect(net.x, net.y, net.width, net.height);
 }
 
-// Function for drawing points
+// function for drawing points
 function drawScore(x, y, score) {
 	ctx.fillStyle = "#fff";
 	ctx.font = "60px Verdana sans-serif";
@@ -84,13 +84,13 @@ function drawScore(x, y, score) {
 	ctx.fillText(score, x, y);
 }
 
-// Function to draw the paddle
+// function to draw the paddle
 function drawPaddle(x, y, width, height, color) {
 	ctx.fillStyle = color;
 	ctx.fillRect(x, y, width, height);
 }
 
-// Function to draw the balls
+// function to draw the balls
 function drawBall(x, y, radius, color) {
 	ctx.fillStyle = color;
 	ctx.beginPath();
@@ -100,10 +100,10 @@ function drawBall(x, y, radius, color) {
 	ctx.fill();
 }
 
-// Drawing functions end
+// drawing functions end
 
-// Move paddles
-// Adding an EventListener to the browser
+// move paddles
+// adding an EventListener to the browser
 window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
 
@@ -151,7 +151,7 @@ function reset() {
 	ball.velocityY = -ball.velocityY;
 }
 
-// collision Detect function
+// collision detect function
 function collisionDetect(player, ball) {
 	// returns true or false
 	player.top = player.y;
@@ -167,7 +167,7 @@ function collisionDetect(player, ball) {
 	return ball.left < player.right && ball.top < player.bottom && ball.right > player.left && ball.bottom > player.top;
 }
 
-// Update function to update the position
+// update function to update the position
 function update() {
 	// move the paddle
 	if (upArrowPressed && user.y > 0) {
@@ -176,14 +176,14 @@ function update() {
 		user.y += 8;
 	}
 
-	// Check if the ball hits the upper or lower wall
+	// check if the ball hits the upper or lower wall
 	if (ball.y + ball.radius >= canvas.height || ball.y - ball.radius <= 0) {
 		// play wallHitSound
 		wallHitSound.play();
 		ball.velocityY = -ball.velocityY;
 	}
 
-	// when the ball hits the right wall
+	// if the ball hits the right wall
 	if (ball.x + ball.radius >= canvas.width) {
 		// play winSound
 		winSound.play();
@@ -192,7 +192,7 @@ function update() {
 		reset();
 	}
 
-	// when the ball hits the left wall
+	// if the ball hits the left wall
 	if (ball.x - ball.radius <= 0) {
 		// play loseSound
 		loseSound.play();
@@ -208,16 +208,16 @@ function update() {
 	// computer paddle move
 	com.y += ((ball.y - (com.y + com.height / 2))) * 0.2;
 
-	// Paddle collision detection
+	// paddle collision detection
 	let player = (ball.x < canvas.width / 2) ? user : com;
 
 	if (collisionDetect(player, ball)) {
 		// play hitSound
 		hitSound.play();
-		// Default angle is 0 deg in radius
+		// default angle is 0 deg in radius
 		let angle = 0;
 
-    // when the ball hits the top of the paddle
+    // if the ball hits the top of the paddle
     if (ball.y < (player.y + player.height / 2)) {
 		// then -1 * Math.PI / 4 = -45deg
 		angle = -1 * Math.PI / 4;
@@ -231,19 +231,19 @@ function update() {
 	ball.velocityX = (player === user ? 1 : -1) * ball.speed * Math.cos(angle);
 	ball.velocityY = ball.speed * Math.sin(angle);
 
-	// Increase ball speed
+	// increase ball speed
 	ball.speed += 0.2;
 	}
 }
 
-// The render function draws everything on canvas
+// the render function draws everything on canvas
 function render() {
 	// set a style
 	ctx.fillStyle = "#2aac2a"; // everything below it gets the color black (#000)
 	// draws the board
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-	// Pull mesh
+	// pull net
 	drawNet();
 	// determine user-score
 	drawScore(canvas.width / 4, canvas.height / 6, user.score);
