@@ -236,10 +236,18 @@ function update() {
 	}
 }
 
+
+// Create a conic gradient
+const gradient = ctx.createConicGradient(0, canvas.width, canvas.height);
+
+// Add color stops
+gradient.addColorStop(0.75, "green");
+gradient.addColorStop(1, "#63b521");
+
 // the render function draws everything on canvas
 function render() {
 	// set a style
-	ctx.fillStyle = "#2aac2a";
+	ctx.fillStyle = gradient;
 	// draws the board
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 

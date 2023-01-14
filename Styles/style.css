@@ -11,46 +11,140 @@ body {
     display: table;
 	text-align: center;
 }
-	  	  
+
+
 h1 {
-	font-size: 3rem;
+	font-size: 2.5vw;
 	font-family: Verdana, Helvetica, sans-serif;
 	color: #fff;
 }
-	  
+
+#link {
+	font-size: 1.5vw;
+}
+
+/* for Twitter, GitHub icon */
+.fa {
+	padding-left: 10px;
+	font-size: 1.5vw;
+	text-decoration: none;
+	margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+	text-decoration: none;
+}
+
+.fa-twitter {
+	color: #55ACEE;
+}
+
+.fa-github {
+	color: #000000;
+}
+
+span {
+	color: aliceblue;
+}
+
+/* select option normal, slow, fast */  
 .options {
-	margin-bottom: 1rem;
+	margin-top: 1vw;
+	margin-bottom: 1vw;
 }
 	  
 label {
-	font-size: 1rem;
+	font-size: 1vw;
 	font-family: Verdana, Helvetica, sans-serif;
 	font-weight: bold;
+	color: #fff;
 }
 	  
 select {
-	border-radius: 0.2rem;
-	color: #616361;
-	font-size: 1rem;
-	font-family: Verdana, Helvetica, sans-serif;
-}
-	  
-button {
-	padding: 0.1rem;
-	border-radius: 0.4rem;
-	background-color: #303730;
-	color: #e9e8e8;
-	font-size: 1rem;
+	border-radius: 0.3vw;
+	color: #8c0585b7;
+	background-color: #fff;
+	font-size: 1vw;
 	font-family: Verdana, Helvetica, sans-serif;
 }
 
+
+/* replay button */
+button {
+	margin-left: 1vw;
+}
+
+.glow-on-hover {
+    width: 6vw;
+    height: auto;
+    border: none;
+    outline: none;
+    color: #8c0585b7;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd9, #00ffa2, #00d9ff, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #fff;
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+
+/* info "use arrow keys" */
 .info {
 	font-size: 1rem;
 	font-family: Verdana, Helvetica, sans-serif;
 	font-weight: bold;
 	color: #fff;
 }
-	  
+
+/* game field */
 canvas {
 	border: 0.5rem solid #fff;
 	cursor: none;
@@ -58,12 +152,12 @@ canvas {
 }
 
 
-/* Buttons hide #onScreenControllers on desktop */
+/* buttons hide #onScreenControllers on desktop */
 #onScreenControllers {
 	display: none;
 }
 
-/* MOBILE */
+/* mobile */
 @media only screen and (max-width: 1200px) {
 #onScreenControllers {
 	width: 100%;
@@ -75,15 +169,13 @@ canvas {
 	z-index: 0;
 }
 
-#onScreenControllers button {
-    background-color: transparent;
-	color: #fff;
-    height: 15vw;
-    width: 15vw;
-    font-size: 7.5vw;
-    border: 1vw solid #00fea5;
-	border-radius: 5rem;
+
+#onScreenControllers > .glow-on-hover {
+    width: 30vw;
+	font-size: 10vw;
+
 }
+
 
 #upButton {
 	float: left;
@@ -101,15 +193,47 @@ canvas {
 	z-index: 1;
 }
 
-#onScreenControllers button:focus {
-	outline: none;
-}
-
-#onScreenControllers button:active {
-	background-color: #00fea5;
-}
 
 .info {
 	display: none;
 }
+
+h1 {
+	font-size: 5vw;
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #fff;
+}
+
+#link {
+	font-size: 3vw;
+}
+
+/* for Twitter, GitHub icon */
+.fa {
+	padding-left: 10px;
+	font-size: 3vw;
+	margin: 5px 2px;
+}
+
+	  
+label {
+	font-size: 3vw;
+	font-family: Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #fff;
+}
+	  
+select {
+	border-radius: 0.3vw;
+	color: #8c0585b7;
+	font-size: 3vw;
+	font-family: Verdana, Helvetica, sans-serif;
+}
+
+.glow-on-hover {
+    width: 17vw;
+	height: auto;
+}
+
+
 }

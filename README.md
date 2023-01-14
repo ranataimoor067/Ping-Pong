@@ -6,4 +6,11 @@
 
  Have fun
 
- ![Preview](PingPongPreview.jpg)
+
+Preview
+
+ ![Preview](Images/PreviewPP.PNG)
+
+Mobile View
+
+ ![Preview](Images/PreviewMobilePP.PNG)
