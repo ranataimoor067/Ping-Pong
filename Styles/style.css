@@ -3,7 +3,7 @@
 }
 	
 body {
-	background-image: url("Tennis.jpg");
+	background-image: radial-gradient(circle, #ee4b2b, #553c9a);
     padding-left: 0;
     padding-right: 0;
     margin-left: auto;

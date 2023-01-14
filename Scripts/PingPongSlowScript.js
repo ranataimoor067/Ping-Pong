@@ -8,10 +8,10 @@ canvas.height = 375;
 document.body.appendChild(canvas);
 
 // sounds
-const hitSound = new Audio("HitPingPong.mp3");
-const winSound = new Audio("WinPingPong.mp3");
-const loseSound = new Audio("LosePingPong.mp3");
-const wallHitSound = new Audio("WallPingPong.mp3");
+const hitSound = new Audio("../Sound/HitPingPong.mp3");
+const winSound = new Audio("../Sound/WinPingPong.mp3");
+const loseSound = new Audio("../Sound/LosePingPong.mp3");
+const wallHitSound = new Audio("../Sound/WallPingPong.mp3");
 
 // net
 const netWidth = 4;
@@ -57,7 +57,7 @@ const ball = {
 	x: canvas.width / 2,
 	y: canvas.height / 2,
 	radius: 7,
-	speed: 7,
+	speed: 5,
 	velocityX: 5,
 	velocityY: 5,
 	color: "#f6ee0e"
@@ -144,7 +144,7 @@ function reset() {
 	// reset the value of the ball to older values
 	ball.x = canvas.width / 2;
 	ball.y = canvas.height / 2;
-	ball.speed = 7;
+	ball.speed = 5;
 
 	// changes the direction of the ball
 	ball.velocityX = -ball.velocityX;
@@ -231,8 +231,8 @@ function update() {
 	ball.velocityX = (player === user ? 1 : -1) * ball.speed * Math.cos(angle);
 	ball.velocityY = ball.speed * Math.sin(angle);
 
-	//increase ball speed - the smaller the slower 0.02 slow
-	ball.speed += 0.2;
+	// increase ball speed
+	ball.speed += 0.1;
 	}
 }
 

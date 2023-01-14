@@ -1,6 +1,6 @@
 // capture a reference to our "canvas" using its ID
 const canvas = document.getElementById("canvas");
-// get a "context". Without "context" we cannot draw on canvas 
+// get a "context", without "context" we cannot draw on canvas 
 const ctx = canvas.getContext("2d");
 
 canvas.width = 625;
@@ -8,10 +8,10 @@ canvas.height = 375;
 document.body.appendChild(canvas);
 
 // sounds
-const hitSound = new Audio("HitPingPong.mp3");
-const winSound = new Audio("WinPingPong.mp3");
-const loseSound = new Audio("LosePingPong.mp3");
-const wallHitSound = new Audio("WallPingPong.mp3");
+const hitSound = new Audio("../Sound/HitPingPong.mp3");
+const winSound = new Audio("../Sound/WinPingPong.mp3");
+const loseSound = new Audio("../Sound/LosePingPong.mp3");
+const wallHitSound = new Audio("../Sound/WallPingPong.mp3");
 
 // net
 const netWidth = 4;
@@ -24,7 +24,7 @@ let upArrowPressed = false;
 let downArrowPressed = false;
 
 
-// objects 
+// objects
 const net = {
 	x: canvas.width / 2 - netWidth / 2,
 	y: 0,
@@ -57,7 +57,7 @@ const ball = {
 	x: canvas.width / 2,
 	y: canvas.height / 2,
 	radius: 7,
-	speed: 9,
+	speed: 7,
 	velocityX: 5,
 	velocityY: 5,
 	color: "#f6ee0e"
@@ -65,17 +65,17 @@ const ball = {
 
 // the declaration of the objects ends
 
-// drawing functions
+// draw functions
 // function to draw the net
 function drawNet() {
-	//  set the color of net
+	// set the color of net
 	ctx.fillStyle = net.color;
 
 	// syntax --> fillRect(x, y, width, height)
 	ctx.fillRect(net.x, net.y, net.width, net.height);
 }
 
-// function for drawing points
+// function to draw points
 function drawScore(x, y, score) {
 	ctx.fillStyle = "#fff";
 	ctx.font = "60px Verdana sans-serif";
@@ -90,7 +90,7 @@ function drawPaddle(x, y, width, height, color) {
 	ctx.fillRect(x, y, width, height);
 }
 
-// function to draw the balls
+// function to draw the ball
 function drawBall(x, y, radius, color) {
 	ctx.fillStyle = color;
 	ctx.beginPath();
@@ -144,7 +144,7 @@ function reset() {
 	// reset the value of the ball to older values
 	ball.x = canvas.width / 2;
 	ball.y = canvas.height / 2;
-	ball.speed = 9;
+	ball.speed = 7;
 
 	// changes the direction of the ball
 	ball.velocityX = -ball.velocityX;
@@ -206,9 +206,9 @@ function update() {
 	ball.y += ball.velocityY;
 
 	// computer paddle move
-	com.y += ((ball.y - (com.y + com.height / 2))) * 0.2;
+	com.y += ((ball.y - (com.y + com.height / 2))) * 0.09;
 
-	// paddle collision detection
+	// collision detection for paddles
 	let player = (ball.x < canvas.width / 2) ? user : com;
 
 	if (collisionDetect(player, ball)) {
@@ -222,26 +222,41 @@ function update() {
 		// then -1 * Math.PI / 4 = -45deg
 		angle = -1 * Math.PI / 4;
 	} else if (ball.y > (player.y + player.height / 2)) {
-		// when it hits the bottom of the paddle
+		// if it hits the bottom of the paddle
 		// then the angle Math.PI / 4 = 45deg
 		angle = Math.PI / 4;
     }
 
-	// change the speed of the ball depending on which paddle hit the ball
+	// change the speed of the ball depending on which paddle the ball was hit with
 	ball.velocityX = (player === user ? 1 : -1) * ball.speed * Math.cos(angle);
 	ball.velocityY = ball.speed * Math.sin(angle);
 
-	// increase ball speed
+	//increase ball speed - the smaller the slower 0.02 slow
 	ball.speed += 0.2;
 	}
 }
 
+
+
+// Create a conic gradient
+// The start angle is 0
+// The center position is 100, 100
+const gradient = ctx.createConicGradient(0, canvas.width, canvas.height);
+
+// Add five color stops
+
+gradient.addColorStop(0.75, "green");
+gradient.addColorStop(1, "#63b521");
+
+
 // the render function draws everything on canvas
 function render() {
 	// set a style
-	ctx.fillStyle = "#2aac2a"; // everything below it gets the color black (#000)
+	ctx.fillStyle = gradient;
 	// draws the board
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
 
 	// pull net
 	drawNet();
@@ -251,7 +266,7 @@ function render() {
 	drawScore(3 * canvas.width / 4, canvas.height / 6, com.score);
 	// draw user paddle
 	drawPaddle(user.x, user.y, user.width, user.height, user.color);
-	// computer paddle drawing
+	// draw computer paddle
 	drawPaddle(com.x, com.y, com.width, com.height, com.color);
 	// draw ball
 	drawBall(ball.x, ball.y, ball.radius, ball.color);
