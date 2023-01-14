@@ -237,17 +237,12 @@ function update() {
 }
 
 
-
 // Create a conic gradient
-// The start angle is 0
-// The center position is 100, 100
 const gradient = ctx.createConicGradient(0, canvas.width, canvas.height);
 
-// Add five color stops
-
-gradient.addColorStop(0.75, "green");
-gradient.addColorStop(1, "#63b521");
-
+// Add color stops
+gradient.addColorStop(0.75, "#4c00ab");
+gradient.addColorStop(1, "blue");
 
 // the render function draws everything on canvas
 function render() {
@@ -256,8 +251,7 @@ function render() {
 	// draws the board
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-
-
+	
 	// pull net
 	drawNet();
 	// determine user-score
