@@ -7,9 +7,9 @@
  Have fun
 
 
-Preview
+Preview 
 
- ![Preview](Images/PreviewPP.PNG)
+ ![Preview](Images/PreviewPP.png)
 
 Mobile View
 
