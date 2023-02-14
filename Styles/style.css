@@ -4,16 +4,15 @@
 	
 body {
 	background-image: radial-gradient(circle, #ee4b2b, #553c9a);
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: table;
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	display: table;
 	text-align: center;
 	font-family: Verdana, Helvetica, sans-serif;
 	text-shadow: 2px 2px 4px #000;
 }
-
 
 h1 {
 	font-size: 2.5vw;
@@ -34,7 +33,7 @@ h1 {
 }
 
 .fa:hover {
-    opacity: 0.7;
+	opacity: 0.7;
 	text-decoration: none;
 }
 
@@ -72,7 +71,6 @@ select {
 	font-family: Verdana, Helvetica, sans-serif;
 }
 
-
 /* replay button */
 button {
 	margin-left: 1vw;
@@ -82,65 +80,64 @@ button {
 }
 
 .glow-on-hover {
-    width: 6vw;
-    height: auto;
-    border: none;
-    outline: none;
-    color: #8c0585b7;
-    background-color: #fff;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
+	width: 6vw;
+	height: auto;
+	border: none;
+	outline: none;
+	color: #8c0585b7;
+	background-color: #fff;
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
+	border-radius: 10px;
 }
 
 .glow-on-hover:before {
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd9, #00ffa2, #00d9ff, #002bff, #7a00ff, #ff00c8, #ff0000);
-    position: absolute;
-    top: -2px;
-    left:-2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowing 20s linear infinite;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
+	content: '';
+	background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd9, #00ffa2, #00d9ff, #002bff, #7a00ff, #ff00c8, #ff0000);
+	position: absolute;
+	top: -2px;
+	left:-2px;
+	background-size: 400%;
+	z-index: -1;
+	filter: blur(5px);
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	animation: glowing 20s linear infinite;
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+	border-radius: 10px;
 }
 
 .glow-on-hover:active {
-    color: #fff;
+	color: #fff;
 }
 
 .glow-on-hover:active:after {
-    background: transparent;
+	background: transparent;
 }
 
 .glow-on-hover:hover:before {
-    opacity: 1;
+	opacity: 1;
 }
 
 .glow-on-hover:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
+	z-index: -1;
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	left: 0;
+	top: 0;
+	border-radius: 10px;
 }
 
 @keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
+	0% { background-position: 0 0; }
+	50% { background-position: 400% 0; }
+	100% { background-position: 0 0; }
 }
-
 
 /* info "use arrow keys" */
 .info {
@@ -158,7 +155,6 @@ canvas {
 	box-shadow: 5px 10px 18px #000;
 }
 
-
 /* buttons hide #onScreenControllers on desktop */
 #onScreenControllers {
 	display: none;
@@ -166,81 +162,77 @@ canvas {
 
 /* mobile */
 @media only screen and (max-width: 1200px) {
-#onScreenControllers {
-	width: 100%;
-    display: table;
-    align-items: center;
-}
+	#onScreenControllers {
+		width: 100%;
+		display: table;
+		align-items: center;
+	}
 
 
-canvas {
-	z-index: 0;
-}
+	canvas {
+		z-index: 0;
+	}
 
+	#onScreenControllers > .glow-on-hover {
+		width: 30vw;
+		font-size: 10vw;
+		box-shadow: 5px 10px 18px #000;
+	}
 
-#onScreenControllers > .glow-on-hover {
-    width: 30vw;
-	font-size: 10vw;
-	box-shadow: 5px 10px 18px #000;
-}
+	#upButton {
+		float: left;
+		position: fixed;
+		top: 80%;
+		left: 2%;
+		z-index: 1;
+	}
 
+	#downButton {
+		float: right;
+		position: fixed;
+		top: 80%;
+		right: 2%;
+		z-index: 1;
+	}
 
-#upButton {
-	float: left;
-	position: fixed;
-	top: 80%;
-	left: 2%;
-	z-index: 1;
-}
+	.info {
+		display: none;
+	}
 
-#downButton {
-	float: right;
-	position: fixed;
-	top: 80%;
-	right: 2%;
-	z-index: 1;
-}
+	h1 {
+		font-size: 5vw;
+		font-family: Verdana, Helvetica, sans-serif;
+		color: #fff;
+	}
 
+	#link {
+		font-size: 3vw;
+	}
 
-.info {
-	display: none;
-}
-
-h1 {
-	font-size: 5vw;
-	font-family: Verdana, Helvetica, sans-serif;
-	color: #fff;
-}
-
-#link {
-	font-size: 3vw;
-}
-
-/* for Twitter, GitHub icon */
-.fa {
-	padding-left: 10px;
-	font-size: 3vw;
-	margin: 5px 2px;
-}
-
+	/* for Twitter, GitHub icon */
+	.fa {
+		padding-left: 10px;
+		font-size: 3vw;
+		margin: 5px 2px;
+	}
+  
+	label {
+		font-size: 3vw;
+		font-family: Verdana, Helvetica, sans-serif;
+		font-weight: bold;
+		color: #fff;
+	}
 	  
-label {
-	font-size: 3vw;
-	font-family: Verdana, Helvetica, sans-serif;
-	font-weight: bold;
-	color: #fff;
-}
-	  
-select {
-	border-radius: 0.3vw;
-	color: #8c0585b7;
-	font-size: 3vw;
-	font-family: Verdana, Helvetica, sans-serif;
-}
+	select {
+		border-radius: 0.3vw;
+		color: #8c0585b7;
+		font-size: 3vw;
+		font-family: Verdana, Helvetica, sans-serif;
+	}
 
-.glow-on-hover {
-    width: 17vw;
-	height: auto;
-}
+	.glow-on-hover {
+		width: 17vw;
+		height: auto;
+	}
 
 }
